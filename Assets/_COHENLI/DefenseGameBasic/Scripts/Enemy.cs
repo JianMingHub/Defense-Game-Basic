@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace COHENLI.DefenseBasic
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IComponentChecking
     {
         public float speed;
         public float atkDistance;
@@ -23,11 +23,15 @@ namespace COHENLI.DefenseBasic
         {
             
         }
+        public bool IsComponentsNull()
+        {
+            return m_amin == null || m_rb == null || m_player == null;
+        }
 
         // Update is called once per frame
         void Update()
         {
-            if(m_rb == null || m_player == null) return;
+            if(IsComponentsNull()) return;
             
             if(Vector2.Distance(m_player.transform.position, transform.position) <= atkDistance)
             {
