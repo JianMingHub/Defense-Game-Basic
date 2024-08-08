@@ -27,7 +27,9 @@ namespace COHENLI.DefenseBasic
             {
                 // Debug.Log("Player clicked mouse button");
                 if(m_anim)
+                {
                     m_anim.SetBool(Const.ATTACK_ANIM, true);
+                }
                 m_isAttacked = true;
             }
             if(m_isAttacked)
