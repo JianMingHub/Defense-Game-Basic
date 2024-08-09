@@ -32,8 +32,10 @@ namespace COHENLI.DefenseBasic
         void Update()
         {
             if(IsComponentsNull()) return;
+
+            float distToPlayer = Vector2.Distance(m_player.transform.position, transform.position);
             
-            if(Vector2.Distance(m_player.transform.position, transform.position) <= atkDistance)
+            if(distToPlayer <= atkDistance)
             {
                 m_amin.SetBool(Const.ATTACK_ANIM, true);
                 m_rb.velocity = Vector2.zero;   // (0,0)
@@ -42,6 +44,15 @@ namespace COHENLI.DefenseBasic
             {
                 m_rb.velocity = new Vector2(-speed, m_rb.velocity.y);
             }
+        }
+        public void Die()
+        {
+            Debug.Log("Die");
+            if(IsComponentsNull()) return;
+
+            m_amin.SetTrigger(Const.DEAD_ANIM);
+            m_rb.velocity = Vector2.zero;
+            gameObject.layer = LayerMask.NameToLayer(Const.DEAD_ANIM);
         }
     }
 }
