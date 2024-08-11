@@ -18,7 +18,7 @@ namespace COHENLI.DefenseBasic
 
             get => PlayerPrefs.GetInt(Const.BEST_SCORE_PREF);
         }
-        public static int cur_player_id
+        public static int curPlayerId
         {
             set => PlayerPrefs.SetInt(Const.CUR_PLAYER_ID_PREF, value);
             get => PlayerPrefs.GetInt(Const.CUR_PLAYER_ID_PREF, 0);

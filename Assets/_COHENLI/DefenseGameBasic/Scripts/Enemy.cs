@@ -11,8 +11,7 @@ namespace COHENLI.DefenseBasic
         private Animator m_amin;
         private Rigidbody2D m_rb;
         private Player m_player;
-        private  bool m_isDead;
-
+        private  bool m_isDead;                 // check if enemy is dead
         private GameManager m_gm;
 
         private void Awake() 

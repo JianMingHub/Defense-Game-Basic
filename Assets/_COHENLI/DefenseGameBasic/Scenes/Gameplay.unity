@@ -157,10 +157,10 @@ MonoBehaviour:
     previewImage: {fileID: 21300000, guid: 19b9263662a549a40a834f4a46709950, type: 3}
   - playerPrefab: {fileID: 226888991560744570, guid: d0f07238134223549804d92dbaa68a85, type: 3}
     price: 400
-    previewImage: {fileID: 21300000, guid: c8c28381cb25ca249b0e29bf051d310c, type: 3}
+    previewImage: {fileID: 21300000, guid: dec3e4052e793ad4ab747106ed4dbaa3, type: 3}
   - playerPrefab: {fileID: 721513804679484997, guid: b610a00aaa59cd94d91843aad443647a, type: 3}
     price: 800
-    previewImage: {fileID: 21300000, guid: d037c744cda024d48a4be1c8c722c5b4, type: 3}
+    previewImage: {fileID: 21300000, guid: e38612cc846a6464c8b664dab95774ec, type: 3}
 --- !u!4 &187212285
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +455,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8517760772129241290, guid: d0f07238134223549804d92dbaa68a85, type: 3}
+      propertyPath: m_Size.x
+      value: 1.045026
+      objectReference: {fileID: 0}
+    - target: {fileID: -8517760772129241290, guid: d0f07238134223549804d92dbaa68a85, type: 3}
+      propertyPath: m_Size.y
+      value: 1.406499
+      objectReference: {fileID: 0}
+    - target: {fileID: -8517760772129241290, guid: d0f07238134223549804d92dbaa68a85, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.5056247
+      objectReference: {fileID: 0}
     - target: {fileID: 5180717004116818615, guid: d0f07238134223549804d92dbaa68a85, type: 3}
       propertyPath: m_Name
       value: Hero_02

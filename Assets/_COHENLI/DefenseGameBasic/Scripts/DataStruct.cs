@@ -7,10 +7,8 @@ namespace COHENLI.DefenseBasic
     [System.Serializable]
     public class ShopItem
     {
-        
         public Player playerPrefab;
         public int price;
         public Sprite previewImage;
     }
 }
-
