@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IComponentChecking
+namespace COHENLI.DefenseBasic
 {
-    bool IsComponentsNull();
+    public interface IComponentChecking
+    {
+        bool IsComponentsNull();
+    }
 }

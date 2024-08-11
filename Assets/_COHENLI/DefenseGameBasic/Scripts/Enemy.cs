@@ -7,7 +7,7 @@ namespace COHENLI.DefenseBasic
     public class Enemy : MonoBehaviour, IComponentChecking
     {
         public float speed;
-        public float atkDistance;
+        public float atkDistance;               // khoảng cách enemy có thể tấn công player
         private Animator m_amin;
         private Rigidbody2D m_rb;
         private Player m_player;
@@ -33,16 +33,17 @@ namespace COHENLI.DefenseBasic
         {
             if(IsComponentsNull()) return;
 
+            // tính khoảng cách giữa player và con quái
             float distToPlayer = Vector2.Distance(m_player.transform.position, transform.position);
             
             if(distToPlayer <= atkDistance)
             {
-                m_amin.SetBool(Const.ATTACK_ANIM, true);
-                m_rb.velocity = Vector2.zero;   // (0,0)
+                m_amin.SetBool(Const.ATTACK_ANIM, true);    // chuyển sang trạng thái tấn công
+                m_rb.velocity = Vector2.zero;   // (0,0)    dừng di chuyển con enemy lại
             }
             else
             {
-                m_rb.velocity = new Vector2(-speed, m_rb.velocity.y);
+                m_rb.velocity = new Vector2(-speed, m_rb.velocity.y);   // con enemy di chuyển
             }
         }
         public void Die()

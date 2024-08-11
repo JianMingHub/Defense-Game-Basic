@@ -19,6 +19,7 @@ namespace COHENLI.DefenseBasic
         public const string PLAYER_PREFIX_PREF = "player_";
         public const string CUR_PLAYER_ID_PREF = "cur_player_id";
         public const string COIN_PREF = "coins";
+        
         public const string MUSIC_VOL_PREF = "music_vol";
         public const string SOUND_VOL_PREF = "sound_vol";
     }

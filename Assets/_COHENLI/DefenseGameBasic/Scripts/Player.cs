@@ -6,8 +6,8 @@ namespace COHENLI.DefenseBasic
 {
     public class Player : MonoBehaviour, IComponentChecking
     {
-        public float atkRate;
         private Animator m_amin;
+        public float atkRate;
         private float m_curAtkRate;
         private bool m_isAttacked;
         private bool m_isDead;
@@ -28,12 +28,14 @@ namespace COHENLI.DefenseBasic
         void Update()
         {
             if(IsComponentsNull()) return;
+            // Chỉ cho Player tấn công khi người dùng click chuột trái và m_isAttacked = false
             if(Input.GetMouseButtonDown(0) && !m_isAttacked)
             {
                 // Debug.Log("Player clicked mouse button");
                 m_amin.SetBool(Const.ATTACK_ANIM, true);
-                m_isAttacked = true;
+                m_isAttacked = true;    // sau khi tấn công xong thì chuyển sang true
             }
+            // kiểm tra ko cho tấn công liên tục, chỉ tấn công sau khoảng thời gian trễ nhất định
             if(m_isAttacked)
             {
                 m_curAtkRate -= Time.deltaTime;
@@ -44,12 +46,13 @@ namespace COHENLI.DefenseBasic
                 }
             }
         }
+        // chuyển trạng thái sau khi tấn công xong, thì ko tấn công nữa (ngoài Unity add hàm này vào animation)
         public void ResetAtkAnim()
         {
             if(IsComponentsNull()) return;
             m_amin.SetBool(Const.ATTACK_ANIM, false);
         }
-
+        // bắt va chạm giữa player với vũ khí, nếu vũ khí va chạm thì player sẽ chết
         private void OnTriggerEnter2D(Collider2D col)
         {
             if(IsComponentsNull()) return;
