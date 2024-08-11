@@ -60,6 +60,7 @@ namespace COHENLI.DefenseBasic
             {
                 m_amin.SetTrigger(Const.DEAD_ANIM);
                 m_isDead = true;
+                gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);             // change player to dead
             }
         }
     }
