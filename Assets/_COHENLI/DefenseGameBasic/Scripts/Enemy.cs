@@ -65,7 +65,7 @@ namespace COHENLI.DefenseBasic
 
             m_gm.Score++;
             int coinBonus = Random.Range(minCoinBonus, maxCoinBonus);
-            Debug.Log(coinBonus);
+            // Debug.Log(coinBonus);
             Pref.coins += coinBonus;
 
             Destroy(gameObject,2f);
