@@ -11,9 +11,11 @@ namespace COHENLI.DefenseBasic
         private float m_curAtkRate;
         private bool m_isAttacked;
         private bool m_isDead;
+        private GameManager m_gm;
         private void Awake() {
             m_amin = GetComponent<Animator>();
             m_curAtkRate = atkRate;
+            m_gm = FindObjectOfType<GameManager>();
         }
         // Start is called before the first frame update
         void Start()
@@ -22,7 +24,7 @@ namespace COHENLI.DefenseBasic
         }
         public bool IsComponentsNull()
         {
-            return m_amin == null;
+            return m_amin == null || m_gm == null;
         }
         // Update is called once per frame
         void Update()
@@ -52,6 +54,11 @@ namespace COHENLI.DefenseBasic
             if(IsComponentsNull()) return;
             m_amin.SetBool(Const.ATTACK_ANIM, false);
         }
+        public void PlayAtkSound()
+        {
+            if(m_gm.auCtr)
+                m_gm.auCtr.PlaySound(m_gm.auCtr.playerAtk);
+        }
         // bắt va chạm giữa player với vũ khí, nếu vũ khí va chạm thì player sẽ chết
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -61,6 +68,7 @@ namespace COHENLI.DefenseBasic
                 m_amin.SetTrigger(Const.DEAD_ANIM);
                 m_isDead = true;
                 gameObject.layer = LayerMask.NameToLayer(Const.DEAD_LAYER);             // change player to dead
+                m_gm.GameOver();
             }
         }
     }

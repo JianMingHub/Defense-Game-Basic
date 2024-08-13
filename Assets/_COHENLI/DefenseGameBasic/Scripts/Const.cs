@@ -22,6 +22,8 @@ namespace COHENLI.DefenseBasic
         
         public const string MUSIC_VOL_PREF = "music_vol";
         public const string SOUND_VOL_PREF = "sound_vol";
+
+        public const string GAMEPLAY_SCENE = "Gameplay";
     }
 }
 

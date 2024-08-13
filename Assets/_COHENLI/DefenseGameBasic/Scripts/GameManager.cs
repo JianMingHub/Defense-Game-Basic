@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace COHENLI.DefenseBasic
@@ -9,6 +10,9 @@ namespace COHENLI.DefenseBasic
         public float spawnTime;         // time to spawn
         public Enemy[] enemyPrefabs;    // list of enemy
         public GUIManager guiMng;       // manager
+        public ShopManager shopMng;
+        public AudioController auCtr;
+        private Player m_curPlayer; // current player
         private bool m_isGameOver;      // check if game is over
         private int m_score;            // score of the player
 
@@ -21,20 +25,39 @@ namespace COHENLI.DefenseBasic
             guiMng.ShowGameGUI(false);
             guiMng.UpdateMainCoins();
         }
+        public bool IsComponentsNull()
+        {
+            return guiMng == null || shopMng == null || auCtr == null;
+        }
         public void PlayGame()
         {
+            if(IsComponentsNull()) return;
+            ActivePlayer();
             StartCoroutine(SpawnEnemy());
             guiMng.ShowGameGUI(true);
             guiMng.UpdateGameplayCoins();
+            auCtr.PlayBgm();
         }
-        public bool IsComponentsNull()
+        public void ActivePlayer()
         {
-            return guiMng == null;
+            if (IsComponentsNull()) return;
+
+            if (m_curPlayer)
+                Destroy(m_curPlayer.gameObject);
+            var shopItem = shopMng.items;
+            if (shopItem == null || shopItem.Length <= 0) return;
+            var newPlayerPb = shopItem[Pref.curPlayerId].playerPrefab;
+            if (newPlayerPb)
+                m_curPlayer = Instantiate(newPlayerPb, new Vector3(-7f, -1f, 0f), Quaternion.identity);
         }
-        // Update is called once per frame
-        void Update()
+        public void GameOver()
         {
-            
+            if (m_isGameOver) return;
+            m_isGameOver = true;
+            Pref.bestScore = m_score;
+            if (guiMng.gameoverDialog)
+                guiMng.gameoverDialog.Show(true);
+            auCtr.PlaySound(auCtr.gameOver);
         }
 
         // Create random enemy position for the player
