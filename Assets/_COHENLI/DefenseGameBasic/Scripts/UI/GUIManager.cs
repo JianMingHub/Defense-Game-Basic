@@ -7,15 +7,17 @@ namespace COHENLI.DefenseBasic
 {
     public class GUIManager : MonoBehaviour
     {
+        public static GUIManager Ins;
+
         public GameObject homeGUI;
         public GameObject gameGUI;
         public Dialog gameoverDialog;
         public Text mainCoinTxt;
         public Text gameplayCoinTxt;
-        // Start is called before the first frame update
-        void Start()
+        
+        public void Awake()
         {
-            
+            Ins = this;
         }
         public void ShowGameGUI(bool isShow)
         {

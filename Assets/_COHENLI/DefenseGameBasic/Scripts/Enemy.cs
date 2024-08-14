@@ -68,11 +68,9 @@ namespace COHENLI.DefenseBasic
             // Debug.Log(coinBonus);
             Pref.coins += coinBonus;
 
-            if(m_gm.guiMng)
-                m_gm.guiMng.UpdateGameplayCoins();
+            GUIManager.Ins.UpdateGameplayCoins();
 
-            if(m_gm.auCtr)
-                m_gm.auCtr.PlaySound(m_gm.auCtr.enemyDead);
+            AudioController.Ins.PlaySound(AudioController.Ins.enemyDead);
 
             Destroy(gameObject,2f);
         }

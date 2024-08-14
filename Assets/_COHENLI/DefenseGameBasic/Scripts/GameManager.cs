@@ -7,36 +7,53 @@ namespace COHENLI.DefenseBasic
 {
     public class GameManager : MonoBehaviour, IComponentChecking
     {
+        public static GameManager Ins;
+
         public float spawnTime;         // time to spawn
         public Enemy[] enemyPrefabs;    // list of enemy
-        public GUIManager guiMng;       // manager
         public ShopManager shopMng;
-        public AudioController auCtr;
         private Player m_curPlayer; // current player
         private bool m_isGameOver;      // check if game is over
         private int m_score;            // score of the player
 
         public int Score { get => m_score; set => m_score = value; }            // get set by player
 
+        public void Awake()
+        {
+            // Ins = this;
+            MakeSingleton();
+        }
+        private void MakeSingleton() 
+        {
+            if (Ins == null)
+            {
+                Ins = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
         // Start is called before the first frame update
         void Start()
         {
             if (IsComponentsNull()) return;
-            guiMng.ShowGameGUI(false);
-            guiMng.UpdateMainCoins();
+            GUIManager.Ins.ShowGameGUI(false);
+            GUIManager.Ins.UpdateMainCoins();
         }
         public bool IsComponentsNull()
         {
-            return guiMng == null || shopMng == null || auCtr == null;
+            return GUIManager.Ins == null || shopMng == null || AudioController.Ins == null;
         }
         public void PlayGame()
         {
             if(IsComponentsNull()) return;
             ActivePlayer();
             StartCoroutine(SpawnEnemy());
-            guiMng.ShowGameGUI(true);
-            guiMng.UpdateGameplayCoins();
-            auCtr.PlayBgm();
+            GUIManager.Ins.ShowGameGUI(true);
+            GUIManager.Ins.UpdateGameplayCoins();
+            AudioController.Ins.PlayBgm();
         }
         public void ActivePlayer()
         {
@@ -55,9 +72,8 @@ namespace COHENLI.DefenseBasic
             if (m_isGameOver) return;
             m_isGameOver = true;
             Pref.bestScore = m_score;
-            if (guiMng.gameoverDialog)
-                guiMng.gameoverDialog.Show(true);
-            auCtr.PlaySound(auCtr.gameOver);
+            GUIManager.Ins.gameoverDialog.Show(true);
+            AudioController.Ins.PlaySound(AudioController.Ins.gameOver);
         }
 
         // Create random enemy position for the player

@@ -10,30 +10,30 @@ namespace COHENLI.DefenseBasic
     {
         public Transform gridRoot;
         public ShopItemUI itemUIPrefab;
-        private ShopManager m_shopMng;
+        // private ShopManager m_shopMng;
         private GameManager m_gm;
 
         public override void Show(bool isShow)
         {
-            Pref.coins = 1000;
+            // Pref.coins = 1000;
             base.Show(isShow);
-            m_shopMng = FindObjectOfType<ShopManager>();
-            m_gm = FindObjectOfType<GameManager>();
+            // m_shopMng = FindObjectOfType<ShopManager>();
+            // m_gm = FindObjectOfType<GameManager>();
             UpdateUI();
         }
 
          public bool IsComponentsNull()
         {
-            return m_shopMng == null && m_gm == null || gridRoot == null;
+            return ShopManager.Ins == null && m_gm == null || gridRoot == null;
         }
 
         private void UpdateUI()
         {
             if (IsComponentsNull()) return;
 
-            ClearChilds();
+            ClearChild();
 
-            var items = m_shopMng.items;
+            var items = ShopManager.Ins.items;
             if (items == null || items.Length <= 0) return;
 
             for (int i = 0; i < items.Length; i++)
@@ -71,15 +71,14 @@ namespace COHENLI.DefenseBasic
 
                 UpdateUI();
 
-                if (m_gm.guiMng)
-                    m_gm.guiMng.UpdateMainCoins();
+                GUIManager.Ins.UpdateMainCoins();
             }
             else
             {
                 Debug.LogWarning("Not enough money");
             }
         }
-        public void ClearChilds () 
+        public void ClearChild() 
         {
             if (gridRoot == null || gridRoot.childCount <= 0) return;
 

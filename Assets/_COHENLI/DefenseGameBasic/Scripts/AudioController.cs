@@ -6,6 +6,8 @@ namespace COHENLI.DefenseBasic
 {
     public class AudioController : MonoBehaviour
     {
+        public static AudioController Ins;
+
         [Header("Main Setting:")]
         [Range(0f, 1f)]
         public float musicVol = 0.3f;
@@ -21,6 +23,10 @@ namespace COHENLI.DefenseBasic
         public AudioClip gameOver;
         public AudioClip[] bgms;
 
+        public void Awake()
+        {
+            Ins = this;
+        }
         private void Start() 
         {
             if (musicAus == null || soundAus == null)  return;
